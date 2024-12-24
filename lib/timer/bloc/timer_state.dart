@@ -7,6 +7,7 @@ sealed class TimerState extends Equatable {
   final int duration;
 
   @override
+  // Two instances are equal if they have the same duration.
   List<Object> get props => [duration];
 }
 
