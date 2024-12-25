@@ -7,6 +7,8 @@ import 'package:flutter_timer/ticker.dart';
 part 'timer_event.dart';
 part 'timer_state.dart';
 
+/// [TimerBloc] class which extends the original [Bloc] class. Takes a stream of [TimerEvent]
+/// as an input and transforms them into a stream of [TimerState] as an output.
 class TimerBloc extends Bloc<TimerEvent, TimerState> {
   final Ticker _ticker;
   static const int _duration = 60;
@@ -14,10 +16,10 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   StreamSubscription<int>? _tickerSubscription;
 
   // TimerBloc constructor, passes the initial state to the parent class [Bloc].
-  // If the [TimerBloc] recieves a [TimerStarted] event, it will call the _onStarted method.
   TimerBloc({required Ticker ticker})
       : _ticker = ticker,
         super(TimerInitial(_duration)) {
+    // When the [TimerBloc] recieves an event, it will call the event handler related to that event.
     on<TimerStarted>(_onStarted);
     on<_TimerTicked>(_onTicked);
     on<TimerPaused>(_onPaused);
