@@ -38,6 +38,8 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
         .listen((duration) => add(_TimerTicked(duration: duration)));
   }
 
+  /// Pushes an updated [TimerRunInProgress] with a new duration every time a [_TimerTicked] event is recieved and the duration
+  /// is greater than 0. When the timer ends, pushes a [TimerRunComplete] state
   void _onTicked(_TimerTicked event, Emitter<TimerState> emit) {
     emit(event.duration > 0
         ? TimerRunInProgress(event.duration)
