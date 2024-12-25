@@ -22,6 +22,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     on<_TimerTicked>(_onTicked);
     on<TimerPaused>(_onPaused);
     on<TimerResumed>(_onResumed);
+    on<TimerReset>(_onReset);
   }
 
   @override
@@ -64,5 +65,12 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
       _tickerSubscription?.resume();
       emit(TimerRunInProgress(state.duration));
     }
+  }
+
+  /// If the [TimerBloc] recieves a [TimerReset] event, cancels the current ```_tucjerSubscription```
+  /// and pushes a [TimerInitial] state with the original duration.
+  void _onReset(TimerReset event, Emitter<TimerState> emit) {
+    _tickerSubscription?.cancel();
+    emit(TimerInitial(_duration));
   }
 }
