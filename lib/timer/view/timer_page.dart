@@ -25,7 +25,19 @@ class TimerView extends StatelessWidget {
         title: const Text("Flutter Timer"),
       ),
       body: Stack(
-        children: <Widget>[],
+        children: <Widget>[
+          Background(),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(bottom: 60.0),
+                child: TimerText(),
+              ),
+              Actions(),
+            ],
+          )
+        ],
       ),
     );
   }
